@@ -1,87 +1,319 @@
 
-import React from 'react';
-import { Shield, Clock, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText, Edit, CheckSquare, Search, File } from 'lucide-react';
 
 const Hero = () => {
-  const handleButtonClick = (action: string) => {
-    console.log(`Botão clicado: ${action}`);
+  const [protocols, setProtocols] = useState({
+    imoveis: '',
+    titulos: '',
+    juridica: ''
+  });
+
+  const [certidoes, setCertidoes] = useState({
+    imoveis: { protocol: '', codigo: '' },
+    titulos: { protocol: '', codigo: '' },
+    juridica: { protocol: '', codigo: '' }
+  });
+
+  const handleProtocolChange = (type: string, value: string) => {
+    setProtocols(prev => ({ ...prev, [type]: value }));
+  };
+
+  const handleCertidaoChange = (type: string, field: string, value: string) => {
+    setCertidoes(prev => ({
+      ...prev,
+      [type]: { ...prev[type], [field]: value }
+    }));
+  };
+
+  const handleConsulta = (type: string, service: string) => {
+    console.log(`Consultando ${service} para ${type}`);
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-red-50 to-green-50 py-16">
+    <section className="bg-gradient-to-br from-amber-50 to-green-100 py-16">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            Serviços Registrais
-            <span className="block text-red-700">Confiáveis e Seguros</span>
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Oferecemos serviços especializados em registro de imóveis, títulos e documentos, 
-            e registro de pessoa jurídica com excelência e tradição há mais de 35 anos.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center space-y-3 p-6 bg-white rounded-lg shadow-md">
-              <div className="bg-red-700 p-3 rounded-full">
-                <Shield className="text-white" size={24} />
-              </div>
-              <div className="text-center">
-                <h3 className="font-bold text-gray-800">Segurança Jurídica</h3>
-                <p className="text-sm text-gray-600">Garantida em todos os processos</p>
+        {/* Consulta de Títulos */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Registro de Imóveis */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-amber-600 p-6">
+            <div className="flex items-center mb-4">
+              <FileText className="text-amber-600 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-amber-800 text-lg">CONSULTA DE TÍTULOS</h3>
+                <p className="text-sm text-amber-700">DE REGISTRO DE IMÓVEIS</p>
               </div>
             </div>
             
-            <div className="flex flex-col items-center space-y-3 p-6 bg-white rounded-lg shadow-md">
-              <div className="bg-green-700 p-3 rounded-full">
-                <Clock className="text-white" size={24} />
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={protocols.imoveis}
+                  onChange={(e) => handleProtocolChange('imoveis', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Digite o protocolo"
+                />
               </div>
-              <div className="text-center">
-                <h3 className="font-bold text-gray-800">Agilidade</h3>
-                <p className="text-sm text-gray-600">No atendimento e processamento</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col items-center space-y-3 p-6 bg-white rounded-lg shadow-md">
-              <div className="bg-red-700 p-3 rounded-full">
-                <Award className="text-white" size={24} />
-              </div>
-              <div className="text-center">
-                <h3 className="font-bold text-gray-800">Tradição</h3>
-                <p className="text-sm text-gray-600">Mais de 35 anos de experiência</p>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Senha</label>
+                <div className="flex gap-2">
+                  <input
+                    type="password"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    placeholder="Digite a senha"
+                  />
+                  <button
+                    onClick={() => handleConsulta('imoveis', 'titulo')}
+                    className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => handleButtonClick('Nossos Serviços')}
-              className="bg-red-700 text-white px-8 py-3 rounded-lg font-medium hover:bg-red-800 transition-colors"
-            >
-              Nossos Serviços
-            </button>
-            <button
-              onClick={() => handleButtonClick('Fale Conosco')}
-              className="border-2 border-green-700 text-green-700 px-8 py-3 rounded-lg font-medium hover:bg-green-700 hover:text-white transition-colors"
-            >
-              Fale Conosco
-            </button>
+          {/* Títulos e Documentos */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-amber-600 p-6">
+            <div className="flex items-center mb-4">
+              <Edit className="text-amber-600 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-amber-800 text-lg">CONSULTA DE TÍTULOS</h3>
+                <p className="text-sm text-amber-700">DE TÍTULOS E DOCUMENTOS</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={protocols.titulos}
+                  onChange={(e) => handleProtocolChange('titulos', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Digite o protocolo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Senha</label>
+                <div className="flex gap-2">
+                  <input
+                    type="password"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    placeholder="Digite a senha"
+                  />
+                  <button
+                    onClick={() => handleConsulta('titulos', 'titulo')}
+                    className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pessoa Jurídica */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-amber-600 p-6">
+            <div className="flex items-center mb-4">
+              <CheckSquare className="text-amber-600 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-amber-800 text-lg">CONSULTA DE TÍTULOS</h3>
+                <p className="text-sm text-amber-700">DE PESSOA JURÍDICA</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={protocols.juridica}
+                  onChange={(e) => handleProtocolChange('juridica', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  placeholder="Digite o protocolo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Senha</label>
+                <div className="flex gap-2">
+                  <input
+                    type="password"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    placeholder="Digite a senha"
+                  />
+                  <button
+                    onClick={() => handleConsulta('juridica', 'titulo')}
+                    className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Logo positioned at bottom */}
-      <div className="text-center mt-16">
-        <div className="flex flex-col items-center space-y-3">
-          <img 
-            src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
-            alt="2º Registro de Imóveis e Anexos de Guarulhos"
-            className="h-16 w-auto"
-          />
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800">
-              2º Registro de Imóveis
-            </h1>
-            <p className="text-lg text-gray-600">e Anexos de Guarulhos</p>
+
+        {/* Consulta de Certidões */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Certidões Registro de Imóveis */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-green-700 p-6">
+            <div className="flex items-center mb-4">
+              <Search className="text-green-700 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-green-800 text-lg">CONSULTA DE CERTIDÕES</h3>
+                <p className="text-sm text-green-700">DE REGISTRO DE IMÓVEIS</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={certidoes.imoveis.protocol}
+                  onChange={(e) => handleCertidaoChange('imoveis', 'protocol', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Digite o protocolo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Código de Segurança:</label>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-black text-white px-3 py-1 rounded font-mono text-sm">QJ1351</div>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={certidoes.imoveis.codigo}
+                    onChange={(e) => handleCertidaoChange('imoveis', 'codigo', e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Digite o Código Aqui"
+                  />
+                  <button
+                    onClick={() => handleConsulta('imoveis', 'certidao')}
+                    className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Certidões Títulos e Documentos */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-green-700 p-6">
+            <div className="flex items-center mb-4">
+              <File className="text-green-700 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-green-800 text-lg">CONSULTA DE CERTIDÕES</h3>
+                <p className="text-sm text-green-700">DE TÍTULOS E DOCUMENTOS</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={certidoes.titulos.protocol}
+                  onChange={(e) => handleCertidaoChange('titulos', 'protocol', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Digite o protocolo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Código de Segurança:</label>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-black text-white px-3 py-1 rounded font-mono text-sm">KE3505</div>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={certidoes.titulos.codigo}
+                    onChange={(e) => handleCertidaoChange('titulos', 'codigo', e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Digite o Código Aqui"
+                  />
+                  <button
+                    onClick={() => handleConsulta('titulos', 'certidao')}
+                    className="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-800 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Certidões Pessoa Jurídica */}
+          <div className="bg-white rounded-lg shadow-lg border-2 border-green-700 p-6">
+            <div className="flex items-center mb-4">
+              <CheckSquare className="text-green-700 mr-3" size={24} />
+              <div>
+                <h3 className="font-bold text-green-800 text-lg">CONSULTA DE CERTIDÕES</h3>
+                <p className="text-sm text-green-700">DE PESSOA JURÍDICA</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Protocolo Nº</label>
+                <input
+                  type="text"
+                  value={certidoes.juridica.protocol}
+                  onChange={(e) => handleCertidaoChange('juridica', 'protocol', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder="Digite o protocolo"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm text-gray-600 mb-1">Código de Segurança:</label>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-black text-white px-3 py-1 rounded font-mono text-sm">LP8850</div>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={certidoes.juridica.codigo}
+                    onChange={(e) => handleCertidaoChange('juridica', 'codigo', e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Digite o Código Aqui"
+                  />
+                  <button
+                    onClick={() => handleConsulta('juridica', 'certidao')}
+                    className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Logo positioned at bottom */}
+        <div className="text-center mt-16">
+          <div className="flex flex-col items-center space-y-3">
+            <img 
+              src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
+              alt="2º Registro de Imóveis e Anexos de Guarulhos"
+              className="h-16 w-auto"
+            />
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-gray-800">
+                2º Registro de Imóveis
+              </h1>
+              <p className="text-lg text-gray-600">e Anexos de Guarulhos</p>
+            </div>
           </div>
         </div>
       </div>
