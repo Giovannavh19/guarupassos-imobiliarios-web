@@ -16,14 +16,25 @@ const AdditionalInfo = () => {
       icon: FileCheck,
       title: 'Proteção de Dados',
       description: 'Informações sobre LGPD e proteção de dados pessoais.',
-      color: 'green'
+      color: 'green',
+      items: [
+        'Política de Privacidade - LGPD',
+        'LGPD'
+      ]
     },
     {
       id: 'serventia',
       icon: Users,
       title: 'Serventia',
       description: 'Informações institucionais e histórico da serventia.',
-      color: 'red'
+      color: 'red',
+      items: [
+        'Missão, Visão e Valores',
+        'O que fazemos',
+        'Política da Qualidade',
+        'Responsabilidade Socioambiental',
+        'Mapa de Localização'
+      ]
     },
     {
       id: 'trabalhe-conosco',
@@ -33,6 +44,10 @@ const AdditionalInfo = () => {
       color: 'green'
     }
   ];
+
+  const handleClick = (sectionTitle: string, item?: string) => {
+    console.log(`Navegando para: ${sectionTitle}${item ? ` > ${item}` : ''}`);
+  };
 
   return (
     <section className="py-16 bg-white">
@@ -54,18 +69,36 @@ const AdditionalInfo = () => {
             return (
               <div
                 key={section.id}
-                className="text-center group cursor-pointer"
+                className="text-center group"
               >
-                <div className={`bg-${colorClass} p-6 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform`}>
+                <div className={`bg-${colorClass} p-6 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform cursor-pointer`}>
                   <IconComponent className="text-white" size={32} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-3">
                   {section.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {section.description}
                 </p>
-                <button className={`mt-4 text-${colorClass} font-medium hover:underline`}>
+                
+                {section.items && (
+                  <div className="space-y-2 mb-4">
+                    {section.items.map((item, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleClick(section.title, item)}
+                        className={`block w-full text-sm text-${colorClass} hover:underline transition-colors`}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                
+                <button 
+                  onClick={() => handleClick(section.title)}
+                  className={`text-${colorClass} font-medium hover:underline transition-colors`}
+                >
                   Saiba mais →
                 </button>
               </div>

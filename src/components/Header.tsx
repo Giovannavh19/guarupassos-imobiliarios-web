@@ -1,22 +1,102 @@
 
 import React, { useState } from 'react';
-import { Menu, X, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Phone, MapPin, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const menuItems = [
-    'Registro de Imóveis',
-    'Títulos e Documentos',
-    'Pessoa Jurídica',
-    'Tabelas de Custas',
-    'Pesquisa de Satisfação',
-    'Fale Conosco',
-    'Compliance',
-    'Proteção de Dados',
-    'Serventia',
-    'Trabalhe Conosco'
+    {
+      title: 'Registro de Imóveis',
+      id: 'registro-de-imoveis',
+      items: [
+        'Circunscrição',
+        'Documentos Mínimos Necessários',
+        'Consultar Protocolos',
+        'Requerimentos',
+        'Serviços Eletrônicos',
+        'Usucapião Extrajudicial'
+      ]
+    },
+    {
+      title: 'Títulos e Documentos',
+      id: 'titulos-e-documentos',
+      items: [
+        'Consulta de Protocolos de TD',
+        'Requerimentos',
+        'Serviço Eletrônico TD'
+      ]
+    },
+    {
+      title: 'Pessoa Jurídica',
+      id: 'pessoa-juridica',
+      items: [
+        'Consulta de Protocolos de PJ',
+        'Requerimentos',
+        'Serviço Eletrônico PJ'
+      ]
+    },
+    {
+      title: 'Tabelas de Custas',
+      id: 'tabelas-de-custas',
+      items: []
+    },
+    {
+      title: 'Pesquisa de Satisfação',
+      id: 'pesquisa-de-satisfacao',
+      items: []
+    },
+    {
+      title: 'Fale Conosco',
+      id: 'fale-conosco',
+      items: []
+    },
+    {
+      title: 'Compliance',
+      id: 'compliance',
+      items: []
+    },
+    {
+      title: 'Proteção de Dados',
+      id: 'protecao-de-dados',
+      items: [
+        'Política de Privacidade - LGPD',
+        'LGPD'
+      ]
+    },
+    {
+      title: 'Serventia',
+      id: 'serventia',
+      items: [
+        'Missão, Visão e Valores',
+        'O que fazemos',
+        'Política da Qualidade',
+        'Responsabilidade Socioambiental',
+        'Mapa de Localização'
+      ]
+    },
+    {
+      title: 'Trabalhe Conosco',
+      id: 'trabalhe-conosco',
+      items: []
+    },
+    {
+      title: 'Mapa do Site',
+      id: 'mapa-do-site',
+      items: []
+    }
   ];
+
+  const handleDropdown = (id: string) => {
+    setActiveDropdown(activeDropdown === id ? null : id);
+  };
+
+  const handleItemClick = (parentTitle: string, itemTitle?: string) => {
+    console.log(`Navegando para: ${parentTitle}${itemTitle ? ` > ${itemTitle}` : ''}`);
+    setActiveDropdown(null);
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -50,24 +130,38 @@ const Header = () => {
                 alt="2º Registro de Imóveis e Anexos de Guarulhos"
                 className="h-12 w-auto"
               />
-              <div>
-                <h1 className="text-xl font-bold text-gray-800">
-                  2º Registro de Imóveis
-                </h1>
-                <p className="text-sm text-gray-600">Anexos de Guarulhos</p>
-              </div>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-1">
-              {menuItems.slice(0, 6).map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
-                >
-                  {item}
-                </a>
+              {menuItems.slice(0, 6).map((item) => (
+                <div key={item.id} className="relative group">
+                  <button
+                    onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
+                    className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
+                  >
+                    {item.title}
+                    {item.items.length > 0 && (
+                      <ChevronDown size={16} className="ml-1" />
+                    )}
+                  </button>
+                  
+                  {item.items.length > 0 && activeDropdown === item.id && (
+                    <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-md shadow-lg border z-50">
+                      <div className="py-2">
+                        {item.items.map((subItem, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleItemClick(item.title, subItem)}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors"
+                          >
+                            {subItem}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
 
@@ -83,16 +177,36 @@ const Header = () => {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <nav className="lg:hidden border-t py-4">
-              <div className="grid grid-cols-1 gap-2">
-                {menuItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </a>
+              <div className="space-y-2">
+                {menuItems.map((item) => (
+                  <div key={item.id}>
+                    <button
+                      onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
+                      className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
+                    >
+                      {item.title}
+                      {item.items.length > 0 && (
+                        <ChevronDown 
+                          size={16} 
+                          className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`}
+                        />
+                      )}
+                    </button>
+                    
+                    {item.items.length > 0 && activeDropdown === item.id && (
+                      <div className="ml-4 mt-2 space-y-1">
+                        {item.items.map((subItem, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleItemClick(item.title, subItem)}
+                            className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                          >
+                            {subItem}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </nav>

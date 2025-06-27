@@ -10,10 +10,12 @@ const Services = () => {
       title: 'Registro de Imóveis',
       description: 'Registros, certidões e informações sobre imóveis em Guarulhos.',
       items: [
-        'Registro de escrituras',
-        'Certidões de propriedade',
-        'Averbações diversas',
-        'Consultas online'
+        'Circunscrição',
+        'Documentos Mínimos Necessários',
+        'Consultar Protocolos',
+        'Requerimentos',
+        'Serviços Eletrônicos',
+        'Usucapião Extrajudicial'
       ]
     },
     {
@@ -22,10 +24,9 @@ const Services = () => {
       title: 'Títulos e Documentos',
       description: 'Registro e autenticação de documentos diversos.',
       items: [
-        'Registro de contratos',
-        'Autenticação de documentos',
-        'Reconhecimento de firmas',
-        'Procurações'
+        'Consulta de Protocolos de TD',
+        'Requerimentos',
+        'Serviço Eletrônico TD'
       ]
     },
     {
@@ -34,10 +35,9 @@ const Services = () => {
       title: 'Pessoa Jurídica',
       description: 'Serviços especializados para empresas e organizações.',
       items: [
-        'Registro de estatutos',
-        'Atas de assembleias',
-        'Alterações contratuais',
-        'Certidões empresariais'
+        'Consulta de Protocolos de PJ',
+        'Requerimentos',
+        'Serviço Eletrônico PJ'
       ]
     },
     {
@@ -78,6 +78,10 @@ const Services = () => {
     }
   ];
 
+  const handleServiceClick = (serviceTitle: string, item?: string) => {
+    console.log(`Navegando para: ${serviceTitle}${item ? ` > ${item}` : ''}`);
+  };
+
   return (
     <section id="servicos" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -112,16 +116,24 @@ const Services = () => {
                   {service.description}
                 </p>
                 
-                <ul className="space-y-2">
+                <ul className="space-y-2 mb-6">
                   {service.items.map((item, index) => (
                     <li key={index} className="flex items-center text-sm text-gray-600">
                       <div className="w-2 h-2 bg-red-700 rounded-full mr-3"></div>
-                      {item}
+                      <button 
+                        onClick={() => handleServiceClick(service.title, item)}
+                        className="hover:text-red-700 transition-colors text-left"
+                      >
+                        {item}
+                      </button>
                     </li>
                   ))}
                 </ul>
                 
-                <button className="mt-6 w-full bg-gradient-to-r from-red-700 to-green-700 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity">
+                <button 
+                  onClick={() => handleServiceClick(service.title)}
+                  className="w-full bg-gradient-to-r from-red-700 to-green-700 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity"
+                >
                   Saiba Mais
                 </button>
               </div>
