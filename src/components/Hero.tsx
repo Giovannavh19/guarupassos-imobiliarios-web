@@ -49,41 +49,80 @@ const Hero = () => {
     }
   ];
 
+  const sidebarItems = [
+    { name: 'Serventia', path: '/serventia' },
+    { name: 'Trabalhe Conosco', path: '/trabalhe-conosco' },
+    { name: 'Pesquisa de Satisfação', path: '/pesquisa-de-satisfacao' },
+    { name: 'Fale Conosco', path: '/fale-conosco' }
+  ];
+
   return (
     <section className="bg-gradient-to-br from-stone-100 via-amber-50 to-red-50 py-12">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-red-900 mb-4">
-            2º Registro de Imóveis e Anexos de Guarulhos
-          </h1>
-          <p className="text-lg text-red-800">
-            Serviços registrais com qualidade e segurança jurídica
-          </p>
+        <div className="flex">
+          {/* Sidebar */}
+          <div className="w-64 pr-8">
+            <div className="bg-white rounded-lg shadow-md border-2 border-red-200 p-6">
+              <h3 className="font-bold text-red-900 text-lg mb-4">Menu</h3>
+              <ul className="space-y-3">
+                {sidebarItems.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      to={item.path}
+                      className="block text-red-700 hover:text-red-900 hover:bg-red-50 px-3 py-2 rounded transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((service) => {
+                const IconComponent = service.icon;
+                return (
+                  <Link
+                    key={service.id}
+                    to={service.path}
+                    className="bg-white rounded-lg shadow-md border-2 border-red-200 p-6 hover:shadow-lg hover:border-red-400 transition-all cursor-pointer"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className="bg-red-900 p-4 rounded-full mb-4">
+                        <IconComponent className="text-white" size={24} />
+                      </div>
+                      <h3 className="font-bold text-red-900 text-lg mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-red-700 text-sm">
+                        {service.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => {
-            const IconComponent = service.icon;
-            return (
-              <Link
-                key={service.id}
-                to={service.path}
-                className="bg-white rounded-lg shadow-md border-2 border-red-200 p-6 hover:shadow-lg hover:border-red-400 transition-all cursor-pointer"
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className="bg-red-900 p-4 rounded-full mb-4">
-                    <IconComponent className="text-white" size={24} />
-                  </div>
-                  <h3 className="font-bold text-red-900 text-lg mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-red-700 text-sm">
-                    {service.description}
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
+        {/* Logo em destaque na parte inferior */}
+        <div className="mt-16 text-center">
+          <div className="bg-white rounded-lg shadow-lg border-2 border-red-300 p-8 inline-block">
+            <img 
+              src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
+              alt="Logo do Cartório"
+              className="h-24 w-auto mx-auto mb-4"
+            />
+            <h2 className="text-2xl font-bold text-red-900">
+              Cartório de Registro
+            </h2>
+            <p className="text-red-700 mt-2">
+              Tradição e confiança em serviços registrais
+            </p>
+          </div>
         </div>
       </div>
     </section>
