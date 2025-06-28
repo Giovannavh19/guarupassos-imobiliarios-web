@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { FileText, Edit, CheckSquare, Search, File } from 'lucide-react';
 
@@ -33,23 +32,6 @@ const Hero = () => {
   return (
     <section className="bg-gradient-to-br from-stone-50 via-amber-50 to-stone-100 py-8">
       <div className="max-w-5xl mx-auto px-4">
-        {/* Logo em destaque */}
-        <div className="text-center mb-8">
-          <div className="flex flex-col items-center space-y-3">
-            <img 
-              src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
-              alt="2º Registro de Imóveis e Anexos de Guarulhos"
-              className="h-16 w-auto"
-            />
-            <div className="text-center">
-              <h1 className="text-2xl font-bold text-amber-900">
-                2º Registro de Imóveis
-              </h1>
-              <p className="text-lg text-amber-800">e Anexos de Guarulhos</p>
-            </div>
-          </div>
-        </div>
-
         {/* Consulta de Protocolos */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {/* Registro de Imóveis */}

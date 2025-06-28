@@ -8,6 +8,11 @@ const Header = () => {
 
   const menuItems = [
     {
+      title: 'Tabelas de Custas',
+      id: 'tabelas-de-custas',
+      items: []
+    },
+    {
       title: 'Registro de Imóveis',
       id: 'registro-de-imoveis',
       items: [
@@ -36,11 +41,6 @@ const Header = () => {
         'Requerimentos',
         'Serviço Eletrônico PJ'
       ]
-    },
-    {
-      title: 'Tabelas de Custas',
-      id: 'tabelas-de-custas',
-      items: []
     },
     {
       title: 'Pesquisa de Satisfação',
@@ -120,7 +120,7 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
+      <header className="bg-red-900 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
@@ -138,7 +138,7 @@ const Header = () => {
                 <div key={item.id} className="relative group">
                   <button
                     onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
-                    className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
+                    className="flex items-center px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
                   >
                     {item.title}
                     {item.items.length > 0 && (
@@ -168,7 +168,7 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
+              className="lg:hidden p-2 rounded-md text-white hover:bg-red-800"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -176,13 +176,13 @@ const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <nav className="lg:hidden border-t py-4">
+            <nav className="lg:hidden border-t border-red-800 py-4">
               <div className="space-y-2">
                 {menuItems.map((item) => (
                   <div key={item.id}>
                     <button
                       onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
-                      className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-md transition-colors"
+                      className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
                     >
                       {item.title}
                       {item.items.length > 0 && (
@@ -199,7 +199,7 @@ const Header = () => {
                           <button
                             key={index}
                             onClick={() => handleItemClick(item.title, subItem)}
-                            className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                            className="block w-full text-left px-3 py-2 text-sm text-gray-300 hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
                           >
                             {subItem}
                           </button>
