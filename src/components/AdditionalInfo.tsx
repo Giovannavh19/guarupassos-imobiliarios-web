@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Shield, Users, FileCheck, AlertTriangle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AdditionalInfo = () => {
   const infoSections = [
@@ -9,7 +10,8 @@ const AdditionalInfo = () => {
       icon: Shield,
       title: 'Compliance/Denúncia/Ouvidoria',
       description: 'Canal oficial para denúncias, sugestões e ouvidoria.',
-      color: 'red'
+      color: 'red',
+      path: '/compliance'
     },
     {
       id: 'protecao-dados',
@@ -17,9 +19,10 @@ const AdditionalInfo = () => {
       title: 'Proteção de Dados',
       description: 'Informações sobre LGPD e proteção de dados pessoais.',
       color: 'green',
+      path: '/protecao-de-dados',
       items: [
-        'Política de Privacidade - LGPD',
-        'LGPD'
+        { name: 'Política de Privacidade - LGPD', path: '/protecao-de-dados#politica' },
+        { name: 'LGPD', path: '/protecao-de-dados#lgpd' }
       ]
     },
     {
@@ -28,12 +31,13 @@ const AdditionalInfo = () => {
       title: 'Serventia',
       description: 'Informações institucionais e histórico da serventia.',
       color: 'red',
+      path: '/serventia',
       items: [
-        'Missão, Visão e Valores',
-        'O que fazemos',
-        'Política da Qualidade',
-        'Responsabilidade Socioambiental',
-        'Mapa de Localização'
+        { name: 'Missão, Visão e Valores', path: '/serventia#missao' },
+        { name: 'O que fazemos', path: '/serventia#servicos' },
+        { name: 'Política da Qualidade', path: '/serventia#qualidade' },
+        { name: 'Responsabilidade Socioambiental', path: '/serventia#responsabilidade' },
+        { name: 'Mapa de Localização', path: '/serventia#localizacao' }
       ]
     },
     {
@@ -41,13 +45,10 @@ const AdditionalInfo = () => {
       icon: AlertTriangle,
       title: 'Trabalhe Conosco',
       description: 'Oportunidades de carreira e processo seletivo.',
-      color: 'green'
+      color: 'green',
+      path: '/trabalhe-conosco'
     }
   ];
-
-  const handleClick = (sectionTitle: string, item?: string) => {
-    console.log(`Navegando para: ${sectionTitle}${item ? ` > ${item}` : ''}`);
-  };
 
   return (
     <section className="py-16 bg-white">
@@ -71,9 +72,11 @@ const AdditionalInfo = () => {
                 key={section.id}
                 className="text-center group"
               >
-                <div className={`bg-${colorClass} p-6 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform cursor-pointer`}>
-                  <IconComponent className="text-white" size={32} />
-                </div>
+                <Link to={section.path}>
+                  <div className={`bg-${colorClass} p-6 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform cursor-pointer`}>
+                    <IconComponent className="text-white" size={32} />
+                  </div>
+                </Link>
                 <h3 className="text-lg font-bold text-gray-800 mb-3">
                   {section.title}
                 </h3>
@@ -84,23 +87,23 @@ const AdditionalInfo = () => {
                 {section.items && (
                   <div className="space-y-2 mb-4">
                     {section.items.map((item, index) => (
-                      <button
+                      <Link
                         key={index}
-                        onClick={() => handleClick(section.title, item)}
+                        to={item.path}
                         className={`block w-full text-sm text-${colorClass} hover:underline transition-colors`}
                       >
-                        {item}
-                      </button>
+                        {item.name}
+                      </Link>
                     ))}
                   </div>
                 )}
                 
-                <button 
-                  onClick={() => handleClick(section.title)}
+                <Link 
+                  to={section.path}
                   className={`text-${colorClass} font-medium hover:underline transition-colors`}
                 >
                   Saiba mais →
-                </button>
+                </Link>
               </div>
             );
           })}

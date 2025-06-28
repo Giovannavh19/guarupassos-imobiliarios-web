@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -10,15 +11,17 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
-                alt="2º Registro de Imóveis"
-                className="h-10 w-auto"
-              />
-              <div>
-                <h3 className="text-lg font-bold">2º Registro de Imóveis</h3>
-                <p className="text-sm text-gray-300">Anexos de Guarulhos</p>
-              </div>
+              <Link to="/" className="flex items-center space-x-3">
+                <img 
+                  src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
+                  alt="2º Registro de Imóveis"
+                  className="h-10 w-auto"
+                />
+                <div>
+                  <h3 className="text-lg font-bold">2º Registro de Imóveis</h3>
+                  <p className="text-sm text-gray-300">Anexos de Guarulhos</p>
+                </div>
+              </Link>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
               Prestando serviços registrais com segurança jurídica, 
@@ -58,11 +61,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">Serviços</h4>
             <ul className="space-y-2 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Registro de Imóveis</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Títulos e Documentos</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pessoa Jurídica</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Certidões</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Autenticações</a></li>
+              <li><Link to="/registro-de-imoveis" className="hover:text-white transition-colors">Registro de Imóveis</Link></li>
+              <li><Link to="/titulos-e-documentos" className="hover:text-white transition-colors">Títulos e Documentos</Link></li>
+              <li><Link to="/pessoa-juridica" className="hover:text-white transition-colors">Pessoa Jurídica</Link></li>
+              <li><Link to="/tabelas-de-custas" className="hover:text-white transition-colors">Tabelas de Custas</Link></li>
+              <li><Link to="/compliance" className="hover:text-white transition-colors">Compliance</Link></li>
             </ul>
           </div>
 
@@ -83,9 +86,9 @@ const Footer = () => {
             <div>
               <h5 className="font-medium mb-2">Links Úteis</h5>
               <ul className="space-y-1 text-sm text-gray-300">
-                <li><a href="#" className="hover:text-white transition-colors">Mapa do Site</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Política de Privacidade</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Termos de Uso</a></li>
+                <li><Link to="/serventia" className="hover:text-white transition-colors">Sobre Nós</Link></li>
+                <li><Link to="/protecao-de-dados" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
+                <li><Link to="/fale-conosco" className="hover:text-white transition-colors">Fale Conosco</Link></li>
               </ul>
             </div>
           </div>

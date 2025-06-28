@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import { Menu, X, Phone, MapPin, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,46 +11,47 @@ const Header = () => {
     {
       title: 'Serventia',
       id: 'serventia',
+      path: '/serventia',
       items: [
-        'Missão, Visão e Valores',
-        'O que fazemos',
-        'Política da Qualidade',
-        'Responsabilidade Socioambiental',
-        'Mapa de Localização'
+        { name: 'Missão, Visão e Valores', path: '/serventia#missao' },
+        { name: 'O que fazemos', path: '/serventia#servicos' },
+        { name: 'Política da Qualidade', path: '/serventia#qualidade' },
+        { name: 'Responsabilidade Socioambiental', path: '/serventia#responsabilidade' },
+        { name: 'Mapa de Localização', path: '/serventia#localizacao' }
       ]
     },
     {
       title: 'Trabalhe Conosco',
       id: 'trabalhe-conosco',
+      path: '/trabalhe-conosco',
       items: []
     },
     {
       title: 'Pesquisa de Satisfação',
       id: 'pesquisa-de-satisfacao',
+      path: '/pesquisa-de-satisfacao',
       items: []
     },
     {
       title: 'Fale Conosco',
       id: 'fale-conosco',
+      path: '/fale-conosco',
       items: []
     },
     {
       title: 'Compliance',
       id: 'compliance',
+      path: '/compliance',
       items: []
     },
     {
       title: 'Proteção de Dados',
       id: 'protecao-de-dados',
+      path: '/protecao-de-dados',
       items: [
-        'Política de Privacidade - LGPD',
-        'LGPD'
+        { name: 'Política de Privacidade - LGPD', path: '/protecao-de-dados#politica' },
+        { name: 'LGPD', path: '/protecao-de-dados#lgpd' }
       ]
-    },
-    {
-      title: 'Mapa do Site',
-      id: 'mapa-do-site',
-      items: []
     }
   ];
 
@@ -56,8 +59,7 @@ const Header = () => {
     setActiveDropdown(activeDropdown === id ? null : id);
   };
 
-  const handleItemClick = (parentTitle: string, itemTitle?: string) => {
-    console.log(`Navegando para: ${parentTitle}${itemTitle ? ` > ${itemTitle}` : ''}`);
+  const handleItemClick = () => {
     setActiveDropdown(null);
     setIsMenuOpen(false);
   };
@@ -89,38 +91,49 @@ const Header = () => {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <img 
-                src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
-                alt="2º Registro de Imóveis e Anexos de Guarulhos"
-                className="h-12 w-auto"
-              />
+              <Link to="/" className="flex items-center space-x-3">
+                <img 
+                  src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
+                  alt="2º Registro de Imóveis e Anexos de Guarulhos"
+                  className="h-12 w-auto"
+                />
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-1">
-              {menuItems.slice(0, 6).map((item) => (
+              {menuItems.map((item) => (
                 <div key={item.id} className="relative group">
-                  <button
-                    onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
-                    className="flex items-center px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
-                  >
-                    {item.title}
-                    {item.items.length > 0 && (
+                  {item.items.length > 0 ? (
+                    <button
+                      onClick={() => handleDropdown(item.id)}
+                      className="flex items-center px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
+                    >
+                      {item.title}
                       <ChevronDown size={16} className="ml-1" />
-                    )}
-                  </button>
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      onClick={handleItemClick}
+                      className="flex items-center px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
+                    >
+                      {item.title}
+                    </Link>
+                  )}
                   
                   {item.items.length > 0 && activeDropdown === item.id && (
                     <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-md shadow-lg border z-50">
                       <div className="py-2">
                         {item.items.map((subItem, index) => (
-                          <button
+                          <Link
                             key={index}
-                            onClick={() => handleItemClick(item.title, subItem)}
+                            to={subItem.path}
+                            onClick={handleItemClick}
                             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors"
                           >
-                            {subItem}
-                          </button>
+                            {subItem.name}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -144,29 +157,38 @@ const Header = () => {
               <div className="space-y-2">
                 {menuItems.map((item) => (
                   <div key={item.id}>
-                    <button
-                      onClick={() => item.items.length > 0 ? handleDropdown(item.id) : handleItemClick(item.title)}
-                      className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
-                    >
-                      {item.title}
-                      {item.items.length > 0 && (
+                    {item.items.length > 0 ? (
+                      <button
+                        onClick={() => handleDropdown(item.id)}
+                        className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
+                      >
+                        {item.title}
                         <ChevronDown 
                           size={16} 
                           className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`}
                         />
-                      )}
-                    </button>
+                      </button>
+                    ) : (
+                      <Link
+                        to={item.path}
+                        onClick={handleItemClick}
+                        className="flex items-center w-full px-3 py-2 text-sm font-medium text-white hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
+                      >
+                        {item.title}
+                      </Link>
+                    )}
                     
                     {item.items.length > 0 && activeDropdown === item.id && (
                       <div className="ml-4 mt-2 space-y-1">
                         {item.items.map((subItem, index) => (
-                          <button
+                          <Link
                             key={index}
-                            onClick={() => handleItemClick(item.title, subItem)}
+                            to={subItem.path}
+                            onClick={handleItemClick}
                             className="block w-full text-left px-3 py-2 text-sm text-gray-300 hover:text-amber-200 hover:bg-red-800 rounded-md transition-colors"
                           >
-                            {subItem}
-                          </button>
+                            {subItem.name}
+                          </Link>
                         ))}
                       </div>
                     )}
