@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X, Phone, MapPin, ChevronDown } from 'lucide-react';
 
@@ -8,39 +7,20 @@ const Header = () => {
 
   const menuItems = [
     {
-      title: 'Tabelas de Custas',
-      id: 'tabelas-de-custas',
+      title: 'Serventia',
+      id: 'serventia',
+      items: [
+        'Missão, Visão e Valores',
+        'O que fazemos',
+        'Política da Qualidade',
+        'Responsabilidade Socioambiental',
+        'Mapa de Localização'
+      ]
+    },
+    {
+      title: 'Trabalhe Conosco',
+      id: 'trabalhe-conosco',
       items: []
-    },
-    {
-      title: 'Registro de Imóveis',
-      id: 'registro-de-imoveis',
-      items: [
-        'Circunscrição',
-        'Documentos Mínimos Necessários',
-        'Consultar Protocolos',
-        'Requerimentos',
-        'Serviços Eletrônicos',
-        'Usucapião Extrajudicial'
-      ]
-    },
-    {
-      title: 'Títulos e Documentos',
-      id: 'titulos-e-documentos',
-      items: [
-        'Consulta de Protocolos de TD',
-        'Requerimentos',
-        'Serviço Eletrônico TD'
-      ]
-    },
-    {
-      title: 'Pessoa Jurídica',
-      id: 'pessoa-juridica',
-      items: [
-        'Consulta de Protocolos de PJ',
-        'Requerimentos',
-        'Serviço Eletrônico PJ'
-      ]
     },
     {
       title: 'Pesquisa de Satisfação',
@@ -64,22 +44,6 @@ const Header = () => {
         'Política de Privacidade - LGPD',
         'LGPD'
       ]
-    },
-    {
-      title: 'Serventia',
-      id: 'serventia',
-      items: [
-        'Missão, Visão e Valores',
-        'O que fazemos',
-        'Política da Qualidade',
-        'Responsabilidade Socioambiental',
-        'Mapa de Localização'
-      ]
-    },
-    {
-      title: 'Trabalhe Conosco',
-      id: 'trabalhe-conosco',
-      items: []
     },
     {
       title: 'Mapa do Site',
