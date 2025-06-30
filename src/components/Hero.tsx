@@ -85,13 +85,13 @@ const Hero = () => {
     <section className="bg-gradient-to-br from-stone-100 via-amber-50 to-red-50 py-12 relative">
       {/* Side Menu */}
       <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40">
-        <div className="bg-green-700 rounded-lg shadow-lg p-4">
+        <div className="bg-green-800 rounded-lg shadow-lg p-4">
           <nav className="space-y-2 mb-4">
             {sideMenuItems.map((item, index) => (
               <Link
                 key={index}
                 to={item.path}
-                className="block text-sm text-white hover:text-green-200 hover:bg-green-600 px-2 py-1 rounded transition-colors"
+                className="block text-sm text-white hover:text-green-200 hover:bg-green-700 px-2 py-1 rounded transition-colors"
               >
                 {item.title}
               </Link>
@@ -105,7 +105,7 @@ const Hero = () => {
                 <a
                   key={index}
                   href={social.url}
-                  className="text-white hover:text-green-200 text-sm px-2 py-1 rounded hover:bg-green-600 transition-colors"
+                  className="text-white hover:text-green-200 text-sm px-2 py-1 rounded hover:bg-green-700 transition-colors"
                 >
                   {social.name}
                 </a>
@@ -115,14 +115,17 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 pl-32">
+      {/* Espaço em branco à esquerda para foto */}
+      <div className="w-48 h-full absolute left-0 top-0 bg-white"></div>
+
+      <div className="max-w-6xl mx-auto px-4 ml-48">
         {/* Logo destacada acima dos blocos */}
         <div className="mb-12 text-center">
           <div className="inline-block">
             <img 
               src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
               alt="Logo do Cartório"
-              className="h-32 w-auto mx-auto"
+              className="h-40 w-auto mx-auto"
             />
           </div>
         </div>
@@ -157,14 +160,14 @@ const Hero = () => {
 
                 {/* Dropdown Menu */}
                 {service.submenu && hoveredService === service.id && (
-                  <div className="absolute top-full left-0 mt-2 bg-green-700 rounded-lg shadow-lg border-2 border-green-600 p-4 z-50 min-w-64">
+                  <div className="absolute top-full left-0 mt-2 bg-green-800 rounded-lg shadow-lg border-2 border-green-700 p-4 z-50 min-w-64">
                     <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
                     <ul className="space-y-2">
                       {service.submenu.map((item, index) => (
                         <li key={index}>
                           <a
                             href="#"
-                            className="block text-sm text-green-100 hover:text-white hover:bg-green-600 px-2 py-1 rounded transition-colors"
+                            className="block text-sm text-green-100 hover:text-white hover:bg-green-700 px-2 py-1 rounded transition-colors"
                           >
                             {item}
                           </a>
