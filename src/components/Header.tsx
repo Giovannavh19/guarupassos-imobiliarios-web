@@ -28,26 +28,11 @@ const Header = () => {
       {/* Main Header */}
       <header className="bg-red-900 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-center items-center py-4">
             {/* Home Icon */}
-            <div className="flex items-center space-x-3">
-              <Link to="/" className="text-white hover:text-red-200 transition-colors">
-                <Home size={28} />
-              </Link>
-            </div>
-
-            {/* Title */}
-            <div className="flex-1 text-center">
-              <h1 className="text-white text-xl font-bold">
-                Cartório de Registro
-              </h1>
-              <p className="text-red-200 text-sm">
-                Tradição e confiança em serviços registrais
-              </p>
-            </div>
-
-            {/* Empty space for balance */}
-            <div className="w-10"></div>
+            <Link to="/" className="text-white hover:text-red-200 transition-colors absolute left-4">
+              <Home size={28} />
+            </Link>
           </div>
         </div>
       </header>

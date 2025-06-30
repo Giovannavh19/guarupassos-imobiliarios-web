@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { FileText, Edit, CheckSquare, Calculator, Shield, Lock } from 'lucide-react';
+import { FileText, Edit, CheckSquare, Calculator, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
@@ -75,40 +75,61 @@ const Hero = () => {
     { title: 'Mapa do Site', path: '#' }
   ];
 
+  const socialIcons = [
+    { name: 'Facebook', icon: 'facebook', url: '#' },
+    { name: 'Instagram', icon: 'instagram', url: '#' },
+    { name: 'WhatsApp', icon: 'whatsapp', url: '#' }
+  ];
+
   return (
     <section className="bg-gradient-to-br from-stone-100 via-amber-50 to-red-50 py-12 relative">
       {/* Side Menu */}
       <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40">
-        <div className="bg-white rounded-lg shadow-lg border-2 border-red-200 p-4">
-          <nav className="space-y-2">
+        <div className="bg-green-700 rounded-lg shadow-lg p-4">
+          <nav className="space-y-2 mb-4">
             {sideMenuItems.map((item, index) => (
               <Link
                 key={index}
                 to={item.path}
-                className="block text-sm text-red-800 hover:text-red-600 hover:bg-red-50 px-2 py-1 rounded transition-colors"
+                className="block text-sm text-white hover:text-green-200 hover:bg-green-600 px-2 py-1 rounded transition-colors"
               >
                 {item.title}
               </Link>
             ))}
           </nav>
+          
+          {/* Social Media Icons */}
+          <div className="border-t border-green-600 pt-4">
+            <div className="flex flex-col space-y-2">
+              {socialIcons.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.url}
+                  className="text-white hover:text-green-200 text-sm px-2 py-1 rounded hover:bg-green-600 transition-colors"
+                >
+                  {social.name}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 pl-32">
         {/* Logo destacada acima dos blocos */}
         <div className="mb-12 text-center">
-          <div className="bg-white rounded-lg shadow-lg border-2 border-red-300 p-8 inline-block">
+          <div className="inline-block">
             <img 
               src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
               alt="Logo do Cartório"
-              className="h-24 w-auto mx-auto"
+              className="h-32 w-auto mx-auto"
             />
           </div>
         </div>
 
         {/* Main Content - Grid de serviços */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => {
+          {services.map((service, serviceIndex) => {
             const IconComponent = service.icon;
             return (
               <div
@@ -136,14 +157,14 @@ const Hero = () => {
 
                 {/* Dropdown Menu */}
                 {service.submenu && hoveredService === service.id && (
-                  <div className="absolute top-0 left-full ml-2 bg-white rounded-lg shadow-lg border-2 border-red-200 p-4 z-50 min-w-64">
-                    <h4 className="font-bold text-red-900 mb-3 text-sm">{service.title}</h4>
+                  <div className="absolute top-full left-0 mt-2 bg-green-700 rounded-lg shadow-lg border-2 border-green-600 p-4 z-50 min-w-64">
+                    <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
                     <ul className="space-y-2">
                       {service.submenu.map((item, index) => (
                         <li key={index}>
                           <a
                             href="#"
-                            className="block text-sm text-red-700 hover:text-red-900 hover:bg-red-50 px-2 py-1 rounded transition-colors"
+                            className="block text-sm text-green-100 hover:text-white hover:bg-green-600 px-2 py-1 rounded transition-colors"
                           >
                             {item}
                           </a>
