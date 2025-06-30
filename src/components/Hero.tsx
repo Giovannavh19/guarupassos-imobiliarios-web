@@ -75,12 +75,6 @@ const Hero = () => {
     { title: 'Mapa do Site', path: '#' }
   ];
 
-  const socialIcons = [
-    { name: 'Facebook', icon: Facebook, url: '#' },
-    { name: 'Instagram', icon: Instagram, url: '#' },
-    { name: 'WhatsApp', icon: 'whatsapp', url: '#' }
-  ];
-
   return (
     <section className="bg-gradient-to-br from-stone-100 via-amber-50 to-red-50 py-12 relative">
       <div className="max-w-7xl mx-auto px-4 flex">
@@ -96,36 +90,51 @@ const Hero = () => {
           </div>
 
           {/* Side Menu */}
-          <div className="bg-green-700 rounded-lg shadow-lg p-4">
-            <nav className="space-y-2 mb-4">
-              {sideMenuItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  className="block text-sm text-white hover:text-green-200 hover:bg-green-600 px-2 py-1 rounded transition-colors"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
+          <div className="bg-green-600 rounded-lg shadow-lg p-4 relative overflow-hidden">
+            {/* Marca d'água */}
+            <div 
+              className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url('/lovable-uploads/ff3ebd3b-7b7c-4387-bc68-f1db360bcf83.png')`
+              }}
+            ></div>
             
-            {/* Social Media Icons */}
-            <div className="border-t border-green-600 pt-4">
-              <div className="flex flex-col space-y-2">
-                {socialIcons.map((social, index) => (
-                  <a
+            {/* Conteúdo do menu */}
+            <div className="relative z-10">
+              <nav className="space-y-2 mb-4">
+                {sideMenuItems.map((item, index) => (
+                  <Link
                     key={index}
-                    href={social.url}
-                    className="flex items-center space-x-2 text-white hover:text-green-200 text-sm px-2 py-1 rounded hover:bg-green-600 transition-colors"
+                    to={item.path}
+                    className="block text-sm text-white hover:text-green-200 hover:bg-green-700 px-2 py-1 rounded transition-colors"
                   >
-                    {social.icon === 'whatsapp' ? (
-                      <span className="text-lg">📱</span>
-                    ) : (
-                      React.createElement(social.icon, { size: 16 })
-                    )}
-                    <span>{social.name}</span>
-                  </a>
+                    {item.title}
+                  </Link>
                 ))}
+              </nav>
+              
+              {/* Social Media Icons */}
+              <div className="border-t border-green-500 pt-4">
+                <div className="flex justify-center space-x-4">
+                  <a
+                    href="#"
+                    className="text-white hover:text-green-200 transition-colors"
+                  >
+                    <Facebook size={20} />
+                  </a>
+                  <a
+                    href="#"
+                    className="text-white hover:text-green-200 transition-colors"
+                  >
+                    <Instagram size={20} />
+                  </a>
+                  <a
+                    href="#"
+                    className="text-white hover:text-green-200 transition-colors"
+                  >
+                    <span className="text-xl">📱</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -139,7 +148,7 @@ const Hero = () => {
               <img 
                 src="/lovable-uploads/55df47ec-5819-4e0c-80cd-18172df26f47.png" 
                 alt="Logo do Cartório"
-                className="h-40 w-auto mx-auto"
+                className="h-48 w-auto mx-auto"
               />
             </div>
           </div>
@@ -161,7 +170,7 @@ const Hero = () => {
                   >
                     <div className="flex flex-col items-center text-center">
                       <div className="bg-white p-4 rounded-full mb-4 border-2 border-red-900 shadow-md">
-                        <IconComponent className="text-red-900" size={24} strokeWidth={0.5} />
+                        <IconComponent className="text-red-900" size={24} strokeWidth={1} />
                       </div>
                       <h3 className="font-bold text-red-900 text-lg mb-2">
                         {service.title}
@@ -174,20 +183,31 @@ const Hero = () => {
 
                   {/* Dropdown Menu */}
                   {service.submenu && hoveredService === service.id && (
-                    <div className="absolute top-full left-0 mt-2 bg-green-700 rounded-lg shadow-lg border-2 border-green-600 p-4 z-50 min-w-64">
-                      <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
-                      <ul className="space-y-2">
-                        {service.submenu.map((item, index) => (
-                          <li key={index}>
-                            <a
-                              href="#"
-                              className="block text-sm text-green-100 hover:text-white hover:bg-green-600 px-2 py-1 rounded transition-colors"
-                            >
-                              {item}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="absolute top-full left-0 mt-2 bg-green-600 rounded-lg shadow-lg border-2 border-green-500 p-4 z-50 min-w-64 relative overflow-hidden">
+                      {/* Marca d'água */}
+                      <div 
+                        className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
+                        style={{
+                          backgroundImage: `url('/lovable-uploads/ff3ebd3b-7b7c-4387-bc68-f1db360bcf83.png')`
+                        }}
+                      ></div>
+                      
+                      {/* Conteúdo do dropdown */}
+                      <div className="relative z-10">
+                        <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
+                        <ul className="space-y-2">
+                          {service.submenu.map((item, index) => (
+                            <li key={index}>
+                              <a
+                                href="#"
+                                className="block text-sm text-green-100 hover:text-white hover:bg-green-700 px-2 py-1 rounded transition-colors"
+                              >
+                                {item}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   )}
                 </div>
