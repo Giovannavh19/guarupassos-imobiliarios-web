@@ -38,9 +38,12 @@ const Header = () => {
 
             {/* Title */}
             <div className="flex-1 text-center">
-              <Link to="/" className="text-white text-xl font-bold">
-                Cartório
-              </Link>
+              <h1 className="text-white text-xl font-bold">
+                Cartório de Registro
+              </h1>
+              <p className="text-red-200 text-sm">
+                Tradição e confiança em serviços registrais
+              </p>
             </div>
 
             {/* Empty space for balance */}
