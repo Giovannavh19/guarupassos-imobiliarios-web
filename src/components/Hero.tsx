@@ -90,51 +90,40 @@ const Hero = () => {
           </div>
 
           {/* Side Menu */}
-          <div className="bg-green-600 rounded-lg shadow-lg p-4 relative overflow-hidden">
-            {/* Marca d'água */}
-            <div 
-              className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('/lovable-uploads/ff3ebd3b-7b7c-4387-bc68-f1db360bcf83.png')`
-              }}
-            ></div>
+          <div className="bg-green-700 rounded-lg shadow-lg p-4">
+            <nav className="space-y-2 mb-4">
+              {sideMenuItems.map((item, index) => (
+                <Link
+                  key={index}
+                  to={item.path}
+                  className="block text-sm text-white hover:text-green-200 hover:bg-green-800 px-2 py-1 rounded transition-colors"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
             
-            {/* Conteúdo do menu */}
-            <div className="relative z-10">
-              <nav className="space-y-2 mb-4">
-                {sideMenuItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.path}
-                    className="block text-sm text-white hover:text-green-200 hover:bg-green-700 px-2 py-1 rounded transition-colors"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </nav>
-              
-              {/* Social Media Icons */}
-              <div className="border-t border-green-500 pt-4">
-                <div className="flex justify-center space-x-4">
-                  <a
-                    href="#"
-                    className="text-white hover:text-green-200 transition-colors"
-                  >
-                    <Facebook size={20} />
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white hover:text-green-200 transition-colors"
-                  >
-                    <Instagram size={20} />
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white hover:text-green-200 transition-colors"
-                  >
-                    <span className="text-xl">📱</span>
-                  </a>
-                </div>
+            {/* Social Media Icons */}
+            <div className="border-t border-green-600 pt-4">
+              <div className="flex justify-center space-x-4">
+                <a
+                  href="#"
+                  className="text-white hover:text-green-200 transition-colors"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a
+                  href="#"
+                  className="text-white hover:text-green-200 transition-colors"
+                >
+                  <Instagram size={20} />
+                </a>
+                <a
+                  href="#"
+                  className="text-white hover:text-green-200 transition-colors"
+                >
+                  <span className="text-xl">📱</span>
+                </a>
               </div>
             </div>
           </div>
@@ -183,31 +172,20 @@ const Hero = () => {
 
                   {/* Dropdown Menu */}
                   {service.submenu && hoveredService === service.id && (
-                    <div className="absolute top-full left-0 mt-2 bg-green-600 rounded-lg shadow-lg border-2 border-green-500 p-4 z-50 min-w-64 relative overflow-hidden">
-                      {/* Marca d'água */}
-                      <div 
-                        className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-                        style={{
-                          backgroundImage: `url('/lovable-uploads/ff3ebd3b-7b7c-4387-bc68-f1db360bcf83.png')`
-                        }}
-                      ></div>
-                      
-                      {/* Conteúdo do dropdown */}
-                      <div className="relative z-10">
-                        <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
-                        <ul className="space-y-2">
-                          {service.submenu.map((item, index) => (
-                            <li key={index}>
-                              <a
-                                href="#"
-                                className="block text-sm text-green-100 hover:text-white hover:bg-green-700 px-2 py-1 rounded transition-colors"
-                              >
-                                {item}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="absolute top-full left-0 mt-2 bg-green-700 rounded-lg shadow-lg border-2 border-green-600 p-4 z-50 min-w-64">
+                      <h4 className="font-bold text-white mb-3 text-sm">{service.title}</h4>
+                      <ul className="space-y-2">
+                        {service.submenu.map((item, index) => (
+                          <li key={index}>
+                            <a
+                              href="#"
+                              className="block text-sm text-green-100 hover:text-white hover:bg-green-800 px-2 py-1 rounded transition-colors"
+                            >
+                              {item}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
