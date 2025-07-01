@@ -1,12 +1,9 @@
+
 import React, { useState, useRef } from 'react';
 import { FileText, Edit, CheckSquare, Calculator, Lock, Facebook, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-interface HeroProps {
-  onDropdownToggle?: (isOpen: boolean) => void;
-}
-
-const Hero = ({ onDropdownToggle }: HeroProps) => {
+const Hero = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -84,21 +81,11 @@ const Hero = ({ onDropdownToggle }: HeroProps) => {
       clearTimeout(hoverTimeoutRef.current);
     }
     setHoveredService(serviceId);
-    
-    // Notify parent component about dropdown state
-    if (onDropdownToggle) {
-      onDropdownToggle(true);
-    }
   };
 
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredService(null);
-      
-      // Notify parent component about dropdown state
-      if (onDropdownToggle) {
-        onDropdownToggle(false);
-      }
     }, 500);
   };
 
@@ -176,7 +163,7 @@ const Hero = ({ onDropdownToggle }: HeroProps) => {
           </div>
 
           {/* Main Content - Grid de serviços */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {services.map((service, serviceIndex) => {
               const IconComponent = service.icon;
               return (
@@ -206,18 +193,13 @@ const Hero = ({ onDropdownToggle }: HeroProps) => {
                     <div className="absolute top-2 right-2 w-3 h-3 bg-red-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </Link>
 
-                  {/* Dropdown Menu with higher z-index and portal positioning */}
+                  {/* Dropdown Menu - Increased z-index to 9999 */}
                   {service.submenu && hoveredService === service.id && (
                     <div 
-                      className="fixed bg-gradient-to-br from-green-800 to-green-900 rounded-xl shadow-2xl border-2 border-green-700 p-4 min-w-64 transform animate-scale-in"
+                      className="absolute top-full left-0 mt-2 bg-gradient-to-br from-green-800 to-green-900 rounded-xl shadow-2xl border-2 border-green-700 p-4 z-[9999] min-w-64 transform animate-scale-in"
                       onMouseEnter={handleSubmenuMouseEnter}
                       onMouseLeave={handleMouseLeave}
-                      style={{ 
-                        zIndex: 10000,
-                        top: '100%',
-                        left: '0',
-                        marginTop: '8px'
-                      }}
+                      style={{ zIndex: 9999 }}
                     >
                       <h4 className="font-bold text-white mb-3 text-sm border-b border-green-700 pb-2">{service.title}</h4>
                       <ul className="space-y-2">
