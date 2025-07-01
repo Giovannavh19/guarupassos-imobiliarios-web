@@ -29,10 +29,25 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/tabelas-de-custas" element={<TabelasCustas />} />
           <Route path="/registro-de-imoveis" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/circunscricao" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/documentos" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/protocolos" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/busca" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/requerimentos" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/servicos-eletronicos" element={<RegistroImoveis />} />
+          <Route path="/registro-de-imoveis/usucapiao" element={<RegistroImoveis />} />
           <Route path="/titulos-e-documentos" element={<TitulosDocumentos />} />
+          <Route path="/titulos-e-documentos/protocolos" element={<TitulosDocumentos />} />
+          <Route path="/titulos-e-documentos/requerimentos" element={<TitulosDocumentos />} />
+          <Route path="/titulos-e-documentos/servico-eletronico" element={<TitulosDocumentos />} />
           <Route path="/pessoa-juridica" element={<PessoaJuridica />} />
+          <Route path="/pessoa-juridica/protocolos" element={<PessoaJuridica />} />
+          <Route path="/pessoa-juridica/requerimentos" element={<PessoaJuridica />} />
+          <Route path="/pessoa-juridica/servico-eletronico" element={<PessoaJuridica />} />
           <Route path="/compliance" element={<Compliance />} />
           <Route path="/protecao-de-dados" element={<ProtecaoDados />} />
+          <Route path="/protecao-de-dados/politica-privacidade" element={<ProtecaoDados />} />
+          <Route path="/protecao-de-dados/lgpd" element={<ProtecaoDados />} />
           <Route path="/serventia" element={<Serventia />} />
           <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
           <Route path="/pesquisa-de-satisfacao" element={<PesquisaSatisfacao />} />

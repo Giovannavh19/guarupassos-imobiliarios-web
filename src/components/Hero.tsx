@@ -86,7 +86,7 @@ const Hero = () => {
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredService(null);
-    }, 750);
+    }, 500);
   };
 
   const handleSubmenuMouseEnter = () => {
@@ -193,12 +193,13 @@ const Hero = () => {
                     <div className="absolute top-2 right-2 w-3 h-3 bg-red-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </Link>
 
-                  {/* Dropdown Menu */}
+                  {/* Dropdown Menu - Increased z-index to 9999 */}
                   {service.submenu && hoveredService === service.id && (
                     <div 
-                      className="absolute top-full left-0 mt-2 bg-gradient-to-br from-green-800 to-green-900 rounded-xl shadow-2xl border-2 border-green-700 p-4 z-50 min-w-64 transform animate-scale-in"
+                      className="absolute top-full left-0 mt-2 bg-gradient-to-br from-green-800 to-green-900 rounded-xl shadow-2xl border-2 border-green-700 p-4 z-[9999] min-w-64 transform animate-scale-in"
                       onMouseEnter={handleSubmenuMouseEnter}
                       onMouseLeave={handleMouseLeave}
+                      style={{ zIndex: 9999 }}
                     >
                       <h4 className="font-bold text-white mb-3 text-sm border-b border-green-700 pb-2">{service.title}</h4>
                       <ul className="space-y-2">
