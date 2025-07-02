@@ -86,7 +86,7 @@ const Hero = () => {
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredService(null);
-    }, 500); // 500ms delay antes de fechar o menu
+    }, 500);
   };
 
   const handleSubmenuMouseEnter = () => {
@@ -166,10 +166,10 @@ const Hero = () => {
                 >
                   <Link
                     to={service.path}
-                    className="bg-white rounded-lg shadow-md border-2 border-red-200 p-6 hover:shadow-lg hover:border-red-400 transition-all cursor-pointer block"
+                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all cursor-pointer block"
                   >
                     <div className="flex flex-col items-center text-center">
-                      <div className="bg-white p-4 rounded-full mb-4 border-2 border-red-900 shadow-md">
+                      <div className="bg-white p-4 rounded-full mb-4 shadow-md">
                         <IconComponent className="text-red-900" size={24} strokeWidth={1} />
                       </div>
                       <h3 className="font-bold text-red-900 text-lg mb-2">
@@ -184,7 +184,8 @@ const Hero = () => {
                   {/* Dropdown Menu */}
                   {service.submenu && hoveredService === service.id && (
                     <div 
-                      className="absolute top-full left-0 mt-2 bg-green-800 rounded-lg shadow-lg border-2 border-green-700 p-4 z-50 min-w-64"
+                      className="absolute top-full left-0 mt-2 rounded-lg shadow-lg border-2 p-4 z-[9999] min-w-64"
+                      style={{ backgroundColor: '#798146', borderColor: '#6b7239' }}
                       onMouseEnter={handleSubmenuMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
@@ -194,7 +195,7 @@ const Hero = () => {
                           <li key={index}>
                             <Link
                               to={item.path}
-                              className="block text-sm text-green-100 hover:text-white hover:bg-green-900 px-2 py-1 rounded transition-colors"
+                              className="block text-sm text-green-100 hover:text-white hover:bg-black/20 px-2 py-1 rounded transition-colors"
                             >
                               {item.title}
                             </Link>
